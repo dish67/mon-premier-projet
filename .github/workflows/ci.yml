@@ -1,4 +1,4 @@
-name: Test Python Script
+name: CI - Tests Python
 
 on:
   push:
@@ -7,22 +7,32 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: 🐍 Installer Python
+      - name: 🐍 Configurer Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: 📦 Installer les dépendances
         run: |
           python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: ▶️ Exécuter le script
+      - name: ▶️ Lancer les tests unitaires
         run: |
-          python main.py
+          pytest -v --junitxml=report.xml --html=report.html
+
+      - name: 📊 Publier les rapports de tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports-tests
+          path: |
+            report.xml
+            report.html
+
