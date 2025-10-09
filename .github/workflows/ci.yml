@@ -35,10 +35,9 @@ jobs:
             report.xml
             report.html
 
-
   docker-build:
     runs-on: ubuntu-latest
-    needs: test   # Le job Docker ne démarre que si les tests unitaires réussissent
+    needs: test
     steps:
       - name: 📥 Checkout du dépôt
         uses: actions/checkout@v4
@@ -48,3 +47,4 @@ jobs:
 
       - name: 🧪 Exécuter les tests dans le conteneur
         run: docker run --rm mon-premier-projet pytest -v
+
