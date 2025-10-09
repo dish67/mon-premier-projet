@@ -11,3 +11,4 @@ Le script contient deux fonctions simples ainsi qu'une constante :
 - `main() -> None` est le point d'entrée du programme. Lorsque le script est exécuté directement (c'est-à-dire que `__name__ == "__main__"`), cette fonction appelle `bonjour()` sans argument et affiche le message grâce à `print`.
 
 L'expression `if __name__ == "__main__":` permet de n'exécuter `main()` que si le fichier est lancé comme script, et non lorsqu'il est importé dans un autre module Python.
+# test trigger
